@@ -4,13 +4,13 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import HomeScreen from '../screens/HomeScreen';
 import CartScreen from '../screens/CartScreen'
-import OrderConfirmationScreen from '../screens/OrderConfirmation'
 import OrderListScreen from '../screens/OrderList'
 import ProductDetailScreen from '../screens/ProductDetail'
 import Login from '../screens/Login';
 import Signup from '../screens/Signup';
 import { Entypo, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { View } from 'react-native'
+import OrderDetailScreen from '../screens/OrderDetailScreen';
 
 
 
@@ -28,49 +28,50 @@ const Auth = () => {
 
 }
 const Cart = () => {
-    return <OrderNav.Navigator >
+    return <OrderNav.Navigator screenOptions={{ headerTitle: "Amazon", headerTintColor: "white", headerStyle: { backgroundColor: "purple" } }}>
         <OrderNav.Screen name="CartScreen" component={CartScreen} />
-        <OrderNav.Screen name="OrderConfirm" component={OrderConfirmationScreen} />
+        <OrderNav.Screen name="OrderDetail" component={OrderDetailScreen} />
     </OrderNav.Navigator>
 }
 
 const Order = () => {
-    return <OrderDetailNav.Navigator>
+    return <OrderDetailNav.Navigator screenOptions={{ headerTitle: "Amazon", headerTintColor: "white", headerStyle: { backgroundColor: "purple" } }}>
         <OrderDetailNav.Screen name="OrderDetail" component={OrderListScreen} />
     </OrderDetailNav.Navigator>
 }
 const TabBar = () => {
     return <TabNav.Navigator screenOptions={{
-        headerShown: false, tabBarShowLabel: false
+        headerShown: false, tabBarShowLabel: false,
+
     }} >
         <TabNav.Screen name="Home" component={Main} options={{
             tabBarIcon: ({ focused }) => {
                 if (focused) {
-                    return <MaterialCommunityIcons name="home-variant" size={24} color="black" />
+                    return <MaterialCommunityIcons name="home-variant" size={24} color="purple" />
                 } else {
-                    return <MaterialCommunityIcons name="home-variant-outline" size={24} color="black" />
+                    return <MaterialCommunityIcons name="home-variant-outline" size={24} color="purple" />
                 }
             }
         }} />
         <TabNav.Screen name="Cart" component={Cart} options={{
             tabBarIcon: ({ focused }) => {
                 if (focused) {
-                    return <Ionicons name="cart" size={24} color="black" />
+                    return <Ionicons name="cart" size={24} color="purple" />
                 } else {
-                    return <Ionicons name="cart-outline" size={24} color="black" />
+                    return <Ionicons name="cart-outline" size={24} color="purple" />
                 }
             }
         }} />
         <TabNav.Screen name="Order" component={Order} options={{
             tabBarIcon: ({ focused }) => {
-                return <Entypo name="list" size={24} color="black" />
+                return <Entypo name="list" size={24} color="purple" />
             }
         }} />
     </TabNav.Navigator>
 }
 const Main = () => {
-    return <MainNav.Navigator>
-        <MainNav.Screen name="E-Commerce App" component={HomeScreen} />
+    return <MainNav.Navigator screenOptions={{ headerTitle: "Amazon", headerTintColor: "white", headerStyle: { backgroundColor: "purple" } }}>
+        <MainNav.Screen name="Home" component={HomeScreen} />
         <MainNav.Screen name="ProductDetail" component={ProductDetailScreen} />
     </MainNav.Navigator>
 }
