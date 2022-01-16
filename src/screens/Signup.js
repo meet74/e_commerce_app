@@ -13,13 +13,11 @@ const SignUp = props => {
 
     const submitHandler = async () => {
         console.log("Submit");
-        fetch(`https://e-commerce-app74.herokuapp.com/app/signup?email=${email}&password=${password}`).then((result) => result.json()).then(data => {
+        fetch(`https://e-commerce-app74.herokuapp.com/app/signup?email=${email}&password=${password}`).then((result) => result).then(data => {
 
-            if (data.message == 'Success') {
+            
                 props.navigation.navigate('TabBar')
-            } else {
-                ToastAndroid.show('User already exist', ToastAndroid.LONG)
-            }
+            
         })
     }
     if (message != null) {
