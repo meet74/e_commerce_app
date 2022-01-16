@@ -15,7 +15,7 @@ const Login = props => {
         console.log(password);
         console.log(email);
         console.log("Submit");
-        fetch(`http://192.168.1.7:3000/login?email=${email}&password=${password}`).then((result) => result.json()).then(data => {
+        fetch(`https://e-commerce-app74.herokuapp.com/app/login?email=${email}&password=${password}`).then((result) => result.json()).then(data => {
             if (data.message == 'Success') {
                 ToastAndroid.show('Successfully Logged in', ToastAndroid.LONG)
                 props.navigation.navigate('TabBar')
