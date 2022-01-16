@@ -13,7 +13,7 @@ const SignUp = props => {
 
     const submitHandler = async () => {
         console.log("Submit");
-        fetch(`http://192.168.1.7:3000/signup?email=${email}&password=${password}`).then((result) => result.json()).then(data => {
+        fetch(`https://e-commerce-app74.herokuapp.com/app/signup?email=${email}&password=${password}`).then((result) => result.json()).then(data => {
 
             if (data.message == 'Success') {
                 props.navigation.navigate('TabBar')
