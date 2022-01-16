@@ -1,12 +1,27 @@
 import React, { useState } from 'react'
-import { View, Text, Image, Dimensions, Pressable, ScrollView } from 'react-native'
+import { useDispatch, useSelector } from 'react-redux'
+import { View, Text, Image, Dimensions, Pressable, ScrollView, ToastAndroid } from 'react-native'
 import { Data } from '../data/Dummy_data'
+import * as cartActions from '../store/actions/cart'
 
 const { height, width } = Dimensions.get('screen')
 const ProductDetailScreen = ({ navigation, route }) => {
     const [quantity, setquantity] = useState(1)
     const id = route.params
     const product = Data.find(prod => prod.id == id);
+    const dispatch = useDispatch();
+    const cartData = useSelector(state => state.carts.cart)
+    const submitHandler = () => {
+        const isCartExist = cartData.find(cd => cd.id === id)
+        if (isCartExist) {
+            dispatch(cartActions.updatecart(id, quantity))
+            ToastAndroid.show("Item updated to cart", ToastAndroid.LONG);
+        } else {
+            dispatch(cartActions.addtocart(id, product.name, product.price, quantity, product.image))
+            ToastAndroid.show("Item added to cart", ToastAndroid.LONG);
+        }
+    }
+
     return <ScrollView style={{ flex: 1, backgroundColor: "white" }}>
         <Image
             source={{ uri: product.image }}
@@ -32,7 +47,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                 </Pressable>
             </View>
         </View>
-        <Pressable>
+        <Pressable onPress={submitHandler}>
             <View style={{ width: width * 0.8, height: 50, backgroundColor: "purple", alignItems: "center", justifyContent: "center", alignSelf: "center", borderRadius: 10, marginVertical: 25 }}>
                 <Text style={{ color: "white", fontFamily: "MontserratBold", fontSize: 16 }}>Add to Cart</Text>
             </View>

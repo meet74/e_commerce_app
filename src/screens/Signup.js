@@ -16,7 +16,7 @@ const SignUp = props => {
         fetch(`http://192.168.1.7:3000/signup?email=${email}&password=${password}`).then((result) => result.json()).then(data => {
 
             if (data.message == 'Success') {
-                props.navigation.navigate('Home')
+                props.navigation.navigate('TabBar')
             } else {
                 ToastAndroid.show('User already exist', ToastAndroid.LONG)
             }

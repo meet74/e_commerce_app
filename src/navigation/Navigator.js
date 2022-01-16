@@ -44,7 +44,7 @@ const TabBar = () => {
         headerShown: false, tabBarShowLabel: false,
 
     }} >
-        <TabNav.Screen name="Home" component={Main} options={{
+        <TabNav.Screen name="Main" component={Main} options={{
             tabBarIcon: ({ focused }) => {
                 if (focused) {
                     return <MaterialCommunityIcons name="home-variant" size={24} color="purple" />

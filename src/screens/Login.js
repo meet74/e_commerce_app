@@ -18,7 +18,7 @@ const Login = props => {
         fetch(`http://192.168.1.7:3000/login?email=${email}&password=${password}`).then((result) => result.json()).then(data => {
             if (data.message == 'Success') {
                 ToastAndroid.show('Successfully Logged in', ToastAndroid.LONG)
-                props.navigation.navigate('Home')
+                props.navigation.navigate('TabBar')
             } else {
                 ToastAndroid.show('Wrong Password', ToastAndroid.LONG)
             }

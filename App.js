@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from 'react'
-
+import { Provider } from 'react-redux'
+import { createStore, combineReducers } from 'redux'
+import cartReducer from './src/store/reducers/cart'
+import orderReducer from './src/store/reducers/order'
 import Navigator from './src/navigation/Navigator'
 import { loadAsync } from 'expo-font'
 import { ActivityIndicator, View } from 'react-native'
 
+const rootreducer = combineReducers({
+  carts: cartReducer,
+  order: orderReducer
+})
+
+const store = createStore(rootreducer)
 
 const App = () => {
   const [fontLoaded, setfontLoaded] = useState(false)
@@ -23,11 +32,12 @@ const App = () => {
 
   }, [fontLoaded])
 
-  return <View style={{ flex: 1 }}>
+  return <Provider store={store}><View style={{ flex: 1 }}>
     {
       fontLoaded ? <Navigator /> : <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}><ActivityIndicator /></View>
     }
   </View>
+  </Provider>
 }
 
 export default App
